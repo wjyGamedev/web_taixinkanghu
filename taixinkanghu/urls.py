@@ -25,9 +25,10 @@ Including another URLconf
 # urlpatterns = [
 #     ('^hello/$', hello),
 # ]
+
 from django.conf.urls import patterns, url, include
 from helloworld.views import *
 
 urlpatterns = [
-    (r'^$', main_page),
+    url(r'^$', main_page),
 ]
