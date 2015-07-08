@@ -4,4 +4,4 @@ from django.db import models
 
 # Create your models here.
 class Account(models.Model):
-    url = models.IntegerField(unique=True)
+    mobile_phone_num = models.IntegerField(unique=True)
