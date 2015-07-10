@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import get_template
+from __future__ import unicode_literals
 
 def main_page(request):
     template = get_template('main_page.html')
@@ -20,8 +21,8 @@ def hospital_list(request):
     import json
 
     response_data = {}
-    response_data['1'] = '北京朝阳医院'
-    response_data['2'] = '北京牛街医院'
+    response_data['1'] = u'北京朝阳医院'
+    response_data['2'] = u'北京牛街医院'
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
