@@ -14,3 +14,14 @@ def main_page(request):
     })
     output = template.render(variables)
     return HttpResponse(output)
+
+
+def hospital_list(request):
+    import json
+
+    response_data = {}
+    response_data['1'] = '北京朝阳医院'
+    response_data['2'] = '北京牛街医院'
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
