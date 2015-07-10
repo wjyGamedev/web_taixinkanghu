@@ -1,10 +1,16 @@
+# -*- encoding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import get_template
-from __future__ import unicode_literals
+
+import sys
+reload(sys)
+sys.setdefaultencoding('UTF-8')
 
 def main_page(request):
     template = get_template('main_page.html')
@@ -21,8 +27,8 @@ def hospital_list(request):
     import json
 
     response_data = {}
-    response_data['1'] = u'北京朝阳医院'
-    response_data['2'] = u'北京牛街医院'
+    response_data['1'] = u'鍖椾含鏈濋槼鍖婚櫌'
+    response_data['2'] = u'鍖椾含鐗涜鍖婚櫌'
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
