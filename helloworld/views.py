@@ -27,7 +27,7 @@ def hospital_list(request):
     import json
 
     request.get_full_path()
-    response_data = [{"id":1,"name":"北京朝阳医院"},{"id":2,"name":"北京牛街医院"}]
+    response_data = {"type":"hospitallist","list":[{"id":1,"name":"北京朝阳医院"},{"id":2,"name":"北京牛街医院"}], "Version":1}
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
