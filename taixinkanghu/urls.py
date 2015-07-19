@@ -33,5 +33,7 @@ from helloworld.views import *
 urlpatterns = [
     url(r'^$', main_page),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^downloads/hostpitallist/$', hospital_list),
+    url(r'^downloads/hospital_list/$', hospital_list),
+    url(r'^downloads/nurse_basics_list/$', nurse_basics_list),
+    url(r'^downloads/nurse_senior_list/$', nurse_senior_list),
 ]
