@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpRequest
 from django.template import Context
 from django.template.loader import get_template
 
@@ -54,18 +54,18 @@ class MobSMS:
 
 
 @csrf_exempt
-def handle_register(requset):
-    if requset.method == 'POST':
-        body_data = {}
+def handle_register(request):
+    if request.method == 'POST':
         try:
-            body_data = json.loads(requset.body)
+            body_unicode = request.body.decode('utf-8')
+            body_data = json.loads(body_unicode)
         except Exception as e:
             return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
-
-        logger.debug('Raw Data: "%s"cat' % requset.body)
-        for i in body_data:
-            logger.debug('body_data Data:[%s]: %s', i, body_data[i])
-    return HttpResponse(requset.body)
+        logger.debug('Raw Data: "%s"cat' % request.body)
+        logger.debug('Raw Data: "%s"cat' % body_data['zone'])
+        logger.debug('Raw Data: "%s"cat' % body_data['phone'])
+        logger.debug('Raw Data: "%s"cat' % body_data['code'])
+    return HttpResponse(request.body)
     # return  mobsms.verify_sms_code(86, 13900000000, '1234')
 
 
