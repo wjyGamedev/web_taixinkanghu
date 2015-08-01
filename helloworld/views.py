@@ -59,8 +59,8 @@ class MobSMS:
 
         if req.status_code == 200:
             j = req.json()
-            return j.get('status', 500)
-
+            return HttpResponse(j, content_type="application/json")
+            # return j.get('status', 500)
         return HttpResponse(str(req.status_code), content_type="text/plain")
 
 
