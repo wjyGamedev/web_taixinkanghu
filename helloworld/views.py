@@ -57,7 +57,7 @@ class MobSMS:
 def handle_register(request):
     import json
 
-    mobsms = MobSMS(7edb6ed2ce14'')
+    mobsms = MobSMS('7edb6ed2ce14')
 
     if request.method == 'POST':
         try:
