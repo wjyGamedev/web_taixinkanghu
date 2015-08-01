@@ -61,6 +61,7 @@ def handle_register(request):
     # except Exception as e:
             # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
         logger.debug('Raw Data: "%s"' % request.body)
+        logger.debug('POST: "%s"' % request.POST)
         logger.debug('phone: "%s"' % request.body['phone'])
         # logger.debug('Raw Data: "%s"cat' % body_data['phone'])
         # logger.debug('Raw Data: "%s"cat' % body_data['code'])
