@@ -56,6 +56,7 @@ def main_page(request):
 @csrf_exempt
 def handle_register(requset):
     logger.debug("enter handle_register")
+    print >>sys.stdout, 'enter: "%s"' % requset.body
     if requset.method == 'POST':
         print >>sys.stdout, 'Raw Data: "%s"' % requset.body
         logger.debug('Raw Data: "%s"' % requset.body)
