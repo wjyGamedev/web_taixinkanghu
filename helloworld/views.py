@@ -56,11 +56,11 @@ class MobSMS:
 @csrf_exempt
 def handle_register(request):
     if request.method == 'POST':
-        try:
-            body_unicode = request.body.decode('utf-8')
-            body_data = json.loads(body_unicode)
-        except Exception as e:
-            return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
+        # try:
+        body_unicode = request.body.decode('utf-8')
+        body_data = json.loads(body_unicode)
+    # except Exception as e:
+            # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
         logger.debug('Raw Data: "%s"cat' % request.body)
         logger.debug('Raw Data: "%s"cat' % body_data['zone'])
         logger.debug('Raw Data: "%s"cat' % body_data['phone'])
