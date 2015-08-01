@@ -1,12 +1,13 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
+from django.core.serializers import json
 from django.views.decorators.csrf import csrf_exempt
 
 
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.template import Context
 from django.template.loader import get_template
 
@@ -32,14 +33,42 @@ def main_page(request):
 
 
 # register
+import requests
+
+class MobSMS:
+    def __init__(self, appkey):
+        self.appkey = appkey
+        self.verify_url = 'https://api.sms.mob.com/sms/verify'
+
+    def verify_sms_code(self, zone, phone, code, debug=False):
+        if debug:
+            return 200
+
+        data = {'appkey': self.appkey, 'phone': phone, 'zone': zone, 'code': code}
+        req = requests.post(self.verify_url, data=data, verify=False)
+        if req.status_code == 200:
+            j = req.json()
+            return j.get('status', 500)
+
+        return 500
+
+
 @csrf_exempt
 def handle_register(requset):
-    logger.debug("enter handle_register")
-    print >>sys.stdout, 'enter: "%s"' % requset.body
     if requset.method == 'POST':
-        print >>sys.stdout, 'Raw Data: "%s"' % requset.body
+        body_data = {}
+        if requset.META.get('CONTENT_TYPE', '').lower() == 'application/json' and len(requset.body) > 0:
+            try:
+                body_data = json.loads(requset.body)
+            except Exception as e:
+                return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
+
         logger.debug('Raw Data: "%s"' % requset.body)
+        for i in body_data:
+            logger.debug('body_data Data:[%s]: %s', i, body_data[i])
     return HttpResponse(requset.body)
+    # return  mobsms.verify_sms_code(86, 13900000000, '1234')
+
 
 
 
