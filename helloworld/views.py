@@ -68,12 +68,13 @@ def handle_register(request):
         logger.debug('body_data: "%s"' % body_data)
         logger.debug('bodyArray: "%s"' % bodyArray)
 
-        for i in bodyArray:
-            logger.debug('array index%s:=s%', i, bodyArray[i])
+        for ele in bodyArray:
+            i = 0
+            logger.debug('array index%d:=s%', ++i, ele)
 
         bodydic = {}
-        for i in bodyArray:
-            bodyArrayEle = bodyArray[i].split(':')
+        for ele in bodyArray:
+            bodyArrayEle = ele.split(':')
             bodydic[bodyArrayEle[0]] = bodyArrayEle[1]
 
         for key in bodydic:
