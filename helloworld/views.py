@@ -55,6 +55,8 @@ class MobSMS:
 
 @csrf_exempt
 def handle_register(request):
+    import json
+    # request.get_full_path()
     if request.method == 'POST':
         # try:
         body_data = json.dumps(request.body.decode('utf-8'))
