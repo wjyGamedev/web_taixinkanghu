@@ -58,15 +58,27 @@ def handle_register(request):
     import json
     # request.get_full_path()
     if request.method == 'POST':
-        # try:
-        body_data = json.dumps(request.body.decode('utf-8'))
-    # except Exception as e:
-            # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
+        try:
+            body_data = json.dumps(request.body.decode('utf-8'))
+        except Exception as e:
+            return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
+
+        bodyArray = body_data.split(',')
         logger.debug('Raw Data: "%s"' % request.body)
         logger.debug('body_data: "%s"' % body_data)
-        logger.debug('phone: "%s"' % body_data['phone'])
-        # logger.debug('Raw Data: "%s"cat' % body_data['phone'])
-        # logger.debug('Raw Data: "%s"cat' % body_data['code'])
+        logger.debug('bodyArray: "%s"' % bodyArray)
+
+        for i in bodyArray:
+            logger.debug('array index%s:=s%', i, bodyArray[i])
+
+        bodydic = {}
+        for i in bodyArray:
+            bodyArrayEle = bodyArray[i].split(':')
+            bodydic[bodyArrayEle[0]] = bodyArrayEle;
+
+         for key in bodydic:
+            logger.debug('map key%s:=s%', key, bodydic[key])
+
     return HttpResponse(request.body)
     # return  mobsms.verify_sms_code(86, 13900000000, '1234')
 
