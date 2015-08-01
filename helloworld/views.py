@@ -10,6 +10,33 @@ from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import get_template
 
+# log
+# import the logging library
+import logging
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
+import os
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/ec2-user/git_workspace/web_taixinkanghu/debug.log',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
 import sys
 reload(sys)
 sys.setdefaultencoding('UTF-8')
@@ -31,7 +58,7 @@ def handle_register(requset):
     if requset.is_ajax():
         if requset.method == 'POST':
             print >>sys.stdout, 'Raw Data: "%s"' % requset.body
-
+            logger.debug("Raw Data:="+requset.body)
     return HttpResponse("OK")
 
 
