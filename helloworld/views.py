@@ -57,13 +57,12 @@ class MobSMS:
 def handle_register(request):
     if request.method == 'POST':
         # try:
-        body_data = json.DjangoJSONEncoder(request.body)
+        # body_data = json.DjangoJSONEncoder(request.body)
     # except Exception as e:
             # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
         logger.debug('Raw Data: "%s"' % request.body)
         # logger.debug('phone: "%s"' % request.body['phone'])
-        logger.debug('body_data: "%s"cat' % body_data)
-        logger.debug('phone: "%s"cat' % body_data['phone'])
+        logger.debug('body_data: "%s"cat' % request._get_post.__getattribute__('code'))
         # logger.debug('Raw Data: "%s"cat' % body_data['code'])
     return HttpResponse(request.body)
     # return  mobsms.verify_sms_code(86, 13900000000, '1234')
