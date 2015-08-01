@@ -57,12 +57,10 @@ class MobSMS:
 def handle_register(requset):
     if requset.method == 'POST':
         body_data = {}
-        if requset.META.get('CONTENT_TYPE', '').lower() == 'application/json' and len(requset.body) > 0:
-            logger.debug('requset')
-            try:
-                body_data = json.loads(requset.body)
-            except Exception as e:
-                return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
+        try:
+            body_data = json.loads(requset.body)
+        except Exception as e:
+            return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
 
         logger.debug('Raw Data: "%s"cat' % requset.body)
         for i in body_data:
