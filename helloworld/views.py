@@ -57,12 +57,10 @@ class MobSMS:
         except Exception as e:
             logger.debug('exception')
 
-        if req.status_code == 200:
-            j = req.json()
-            return HttpResponse(j, content_type="application/json")
-            # return j.get('status', 500)
-        return HttpResponse(str(req.status_code), content_type="text/plain")
-
+        response_data = {}
+        response_data['status'] = req.status_code
+        response_data['json'] = req.json()
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @csrf_exempt
 def handle_register(request):
