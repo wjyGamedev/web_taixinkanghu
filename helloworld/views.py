@@ -69,8 +69,7 @@ def handle_register(request):
         logger.debug('bodyArray: "%s"' % bodyArray)
 
         for ele in bodyArray:
-            i = 0
-            logger.debug('array index%d:=s%', ++i, ele)
+            logger.debug('ele %s%',ele)
 
         bodydic = {}
         for ele in bodyArray:
