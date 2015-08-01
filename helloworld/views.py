@@ -55,10 +55,9 @@ def main_page(request):
 # register
 @csrf_exempt
 def handle_register(requset):
-    if requset.is_ajax():
-        if requset.method == 'POST':
-            print >>sys.stdout, 'Raw Data: "%s"' % requset.body
-            logger.debug('Raw Data: "%s"' % requset.body)
+    if requset.method == 'POST':
+        print >>sys.stdout, 'Raw Data: "%s"' % requset.body
+        logger.debug('Raw Data: "%s"' % requset.body)
     return HttpResponse("OK")
 
 
