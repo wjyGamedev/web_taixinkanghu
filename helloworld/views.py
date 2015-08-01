@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
-from django.core.serializers import json
+import json
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -41,6 +41,7 @@ class MobSMS:
         self.verify_url = 'https://api.sms.mob.com/sms/verify'
 
     def verify_sms_code(self, zone, phone, code, debug=False):
+
         data = {'appkey': self.appkey, 'phone': phone, 'zone': zone, 'code': code}
 
         logger.debug('appkey: "%s"',self.appkey)
