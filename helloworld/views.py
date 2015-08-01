@@ -42,12 +42,26 @@ class MobSMS:
 
     def verify_sms_code(self, zone, phone, code, debug=False):
         data = {'appkey': self.appkey, 'phone': phone, 'zone': zone, 'code': code}
+
+        logger.debug('appkey: "%s"',self.appkey)
+        logger.debug('zone: "%s"', zone)
+        logger.debug('phone: "%s"', phone)
+        logger.debug('code: "%s"', code)
+
         req = requests.post(self.verify_url, data=data, verify=False)
+
+        try:
+            logger.debug('req: "%s"', req)
+            logger.debug('str(req.status_code): "%s"', str(req.status_code))
+            logger.debug('req.json: "%s"', req.json)
+        except Exception as e:
+            logger.debug('exception')
+
         if req.status_code == 200:
             j = req.json()
             return j.get('status', 500)
 
-        return HttpResponse(req.status_code, content_type="text/plain")
+        return HttpResponse(str(req.status_code), content_type="text/plain")
 
 
 @csrf_exempt
