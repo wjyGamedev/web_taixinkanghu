@@ -74,9 +74,9 @@ def handle_register(request):
         bodydic = {}
         for i in bodyArray:
             bodyArrayEle = bodyArray[i].split(':')
-            bodydic[bodyArrayEle[0]] = bodyArrayEle;
+            bodydic[bodyArrayEle[0]] = bodyArrayEle[1]
 
-         for key in bodydic:
+        for key in bodydic:
             logger.debug('map key%s:=s%', key, bodydic[key])
 
     return HttpResponse(request.body)
