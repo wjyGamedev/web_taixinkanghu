@@ -64,20 +64,12 @@ def handle_register(request):
             logger.debug('body_data json.loads error')
             # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
 
-        try:
-            body_data1 = json.dumps(request.body.decode('utf-8'))
-        except Exception as e:
-            logger.debug('body_data1 json.dumps error')
-
-        try:
-            body_data2 = json.loads(body_data1)
-        except Exception as e:
-            logger.debug('body_data2 json.dumps error')
-
         logger.debug('Raw Data: "%s"' % request.body)
         logger.debug('body_data: "%s"', body_data)
-        logger.debug('body_data1: "%s"', body_data1)
-        logger.debug('body_data2: "%s"', body_data2)
+
+        logger.debug('zone: "%s"', body_data['zone'])
+        logger.debug('phone: "%s"', body_data['phone'])
+        logger.debug('code: "%s"', body_data['code'])
         #
         # for ele in bodyArray:
         #     logger.debug('ele %s%',ele)
