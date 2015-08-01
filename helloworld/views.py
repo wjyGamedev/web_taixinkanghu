@@ -59,26 +59,36 @@ def handle_register(request):
     # request.get_full_path()
     if request.method == 'POST':
         try:
-            body_data = json.dumps(request.body.decode('utf-8'))
+            body_data = json.loads(request.body.decode('utf-8'))
         except Exception as e:
-            return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
+            logger.debug('body_data json.loads error')
+            # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
 
-        bodyArray = body_data.split(',')
+        try:
+            body_data1 = json.dumps(request.body.decode('utf-8'))
+        except Exception as e:
+            logger.debug('body_data1 json.dumps error')
+
+        try:
+            body_data2 = json.loads(body_data1)
+        except Exception as e:
+            logger.debug('body_data2 json.dumps error')
+
         logger.debug('Raw Data: "%s"' % request.body)
-        logger.debug('body_data: "%s"' % body_data)
-        logger.debug('bodyArray: "%s"' % bodyArray)
-
-        for ele in bodyArray:
-            logger.debug('ele %s%',ele)
-
-        bodydic = {}
-        for ele in bodyArray:
-            bodyArrayEle = ele.split(':')
-            bodydic[bodyArrayEle[0]] = bodyArrayEle[1]
-
-        for key in bodydic:
-            logger.debug('map key%s:=s%', key, bodydic[key])
-
+        logger.debug('body_data: "%s"', body_data)
+        logger.debug('body_data1: "%s"', body_data1)
+        logger.debug('body_data2: "%s"', body_data2)
+        #
+        # for ele in bodyArray:
+        #     logger.debug('ele %s%',ele)
+        #
+        # bodydic = {}
+        # for ele in bodyArray:
+        #     bodyArrayEle = ele.split(':')
+        #     bodydic[bodyArrayEle[0]] = bodyArrayEle[1]
+        #
+        # for key in bodydic:
+        #     logger.debug('map key%s:=s%', key, bodydic[key])
     return HttpResponse(request.body)
     # return  mobsms.verify_sms_code(86, 13900000000, '1234')
 
