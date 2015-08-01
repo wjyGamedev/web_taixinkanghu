@@ -57,11 +57,11 @@ class MobSMS:
 def handle_register(request):
     if request.method == 'POST':
         # try:
-        body_data = json.Deserializer(request.body.decode('utf-8'))
+        # body_data = json.Deserializer(request.body.decode('utf-8'))
     # except Exception as e:
             # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
         logger.debug('Raw Data: "%s"' % request.body)
-        logger.debug('Raw Data: "%s"' % body_data)
+        logger.debug('phone: "%s"' % request.body['phone'])
         # logger.debug('Raw Data: "%s"cat' % body_data['phone'])
         # logger.debug('Raw Data: "%s"cat' % body_data['code'])
     return HttpResponse(request.body)
