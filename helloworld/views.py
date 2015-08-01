@@ -62,7 +62,7 @@ def handle_register(request):
             # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
         logger.debug('Raw Data: "%s"' % request.body)
         # logger.debug('phone: "%s"' % request.body['phone'])
-        logger.debug('body_data: "%s"cat' % request._get_post.__getattribute__('code'))
+        logger.debug('body_data: "%s"cat' % request._get_post)
         # logger.debug('Raw Data: "%s"cat' % body_data['code'])
     return HttpResponse(request.body)
     # return  mobsms.verify_sms_code(86, 13900000000, '1234')
