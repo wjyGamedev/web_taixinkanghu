@@ -56,7 +56,9 @@ class MobSMS:
 @csrf_exempt
 def handle_register(request):
     import json
-    # request.get_full_path()
+
+    mobsms = MobSMS(7edb6ed2ce14'')
+
     if request.method == 'POST':
         try:
             body_data = json.loads(request.body.decode('utf-8'))
@@ -70,19 +72,7 @@ def handle_register(request):
         logger.debug('zone: "%s"', body_data['zone'])
         logger.debug('phone: "%s"', body_data['phone'])
         logger.debug('code: "%s"', body_data['code'])
-        #
-        # for ele in bodyArray:
-        #     logger.debug('ele %s%',ele)
-        #
-        # bodydic = {}
-        # for ele in bodyArray:
-        #     bodyArrayEle = ele.split(':')
-        #     bodydic[bodyArrayEle[0]] = bodyArrayEle[1]
-        #
-        # for key in bodydic:
-        #     logger.debug('map key%s:=s%', key, bodydic[key])
-    return HttpResponse(request.body)
-    # return  mobsms.verify_sms_code(86, 13900000000, '1234')
+    return  mobsms.verify_sms_code(body_data['zone'], body_data['phone'], body_data['code'])
 
 
 
