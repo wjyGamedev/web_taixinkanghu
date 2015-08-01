@@ -1,5 +1,7 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
+from django.views.decorators.csrf import csrf_exempt
+
 
 from django.shortcuts import render
 
@@ -24,6 +26,7 @@ def main_page(request):
 
 
 # register
+@csrf_exempt
 def handle_register(requset):
     if requset.is_ajax():
         if requset.method == 'POST':
