@@ -58,12 +58,13 @@ def handle_register(requset):
     if requset.method == 'POST':
         body_data = {}
         if requset.META.get('CONTENT_TYPE', '').lower() == 'application/json' and len(requset.body) > 0:
+            logger.debug('requset')
             try:
                 body_data = json.loads(requset.body)
             except Exception as e:
                 return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
 
-        logger.debug('Raw Data: "%s"' % requset.body)
+        logger.debug('Raw Data: "%s"cat' % requset.body)
         for i in body_data:
             logger.debug('body_data Data:[%s]: %s', i, body_data[i])
     return HttpResponse(requset.body)
