@@ -37,4 +37,5 @@ urlpatterns = [
     url(r'^downloads/nurse_basics_list/$', nurse_basics_list),
     url(r'^downloads/nurse_senior_list/$', nurse_senior_list),
     url(r'^downloads/goods_basics_list/$', goods_basics_list),
+    url(r'^downloads/user/loginAction/$', handle_register),
 ]
