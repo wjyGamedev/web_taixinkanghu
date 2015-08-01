@@ -16,27 +16,6 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-import os
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/home/ec2-user/git_workspace/web_taixinkanghu/debug.log',
-        },
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
-
 import sys
 reload(sys)
 sys.setdefaultencoding('UTF-8')
