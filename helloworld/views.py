@@ -84,9 +84,13 @@ def handle_register(request):
         except Exception as e:
             # 方式02；json用map来发送
             try:
+                body_data = json.dumps(request.body.decode('utf-8'))
                 zone = request.POST.get('zone')
                 phone = request.POST.get('phone')
                 code = request.POST.get('code')
+                zone = body_data['zone']
+                phone = body_data['phone']
+                code = body_data['code']
             except Exception as e:
                 logger.debug('json map error')
             # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
