@@ -70,35 +70,19 @@ def handle_register(request):
     mobsms = MobSMS('7edb6ed2ce14')
 
     if request.method == 'POST':
-        logger.debug('Raw Data: "%s"' % request.body)
         try:
-            # 方式01：json用二进制流发送
             body_data = json.loads(request.body.decode('utf-8'))
-            logger.debug('body_data: "%s"', body_data)
-            logger.debug('body_data zone: "%s"', body_data['zone'])
-            logger.debug('body_data phone: "%s"', body_data['phone'])
-            logger.debug('body_data code: "%s"', body_data['code'])
-            zone = body_data['zone']
-            phone = body_data['phone']
-            code = body_data['code']
         except Exception as e:
-            # 方式02；json用map来发送
-            try:
-                body_data = json.dumps(request.body.decode('utf-8'))
-                zone = request.POST.get('zone')
-                phone = request.POST.get('phone')
-                code = request.POST.get('code')
-                zone = body_data['zone']
-                phone = body_data['phone']
-                code = body_data['code']
-            except Exception as e:
-                logger.debug('json map error')
+            logger.debug('body_data json.loads error')
             # return HttpResponseBadRequest(json.dumps({'error': 'Invalid request: {0}'.format(str(e))}), content_type="application/json")
 
-        logger.debug('zone: "%s"', zone)
-        logger.debug('phone: "%s"', phone)
-        logger.debug('code: "%s"', code)
-    return  mobsms.verify_sms_code(zone, phone, code)
+        logger.debug('Raw Data: "%s"' % request.body)
+        logger.debug('body_data: "%s"', body_data)
+
+        logger.debug('zone: "%s"', body_data['zone'])
+        logger.debug('phone: "%s"', body_data['phone'])
+        logger.debug('code: "%s"', body_data['code'])
+    return  mobsms.verify_sms_code(body_data['zone'], body_data['phone'], body_data['code'])
 
 
 
